@@ -1,0 +1,5 @@
+Bundle-Name: egf-react-portlet
+Bundle-SymbolicName: br.com.react.egf.portlet
+Bundle-Version: 1.0.0
+Export-Package: br.com.react.egf.portlet.constants
+Web-ContextPath: /egf-react-portlet
