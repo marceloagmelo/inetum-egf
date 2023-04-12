@@ -23,12 +23,6 @@ Feito isso, você deve executar o start do servidor:
 blade server start
 ```
 
-Isso irá criar um container docker com o MySQL na sua máquina, e também irá baixar o bundle do Liferay 7.4 e incluí-lo na pasta bundles na raíz do seu workspace. Se você quiser gerar apenas o bundle, por exemplo se já tiver um container MySQL rodando, pode executar apenas:
-
-```
-./setup.sh bundle
-```
-
 Agora você pode iniciar o seu bundle local usando:
 
 ```
