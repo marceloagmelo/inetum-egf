@@ -23,12 +23,6 @@ Feito isso, você deve executar o start do servidor:
 blade server start
 ```
 
-Agora você pode iniciar o seu bundle local usando:
-
-```
-blade server start
-```
-
 Para executar em modo debug, utilize:
 
 ```
