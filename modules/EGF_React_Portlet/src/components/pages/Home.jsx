@@ -30,25 +30,24 @@ export default function Home(configuration) {
             <div className="page-title">
                 <h2 className="mb-5">Selecione a categoria dos documentos</h2>
             </div>
-            {categories.map((category) => {
-                return <div className="container" value={category.Country} key={category.Mfr_ID}>
-                    <div className="row">
-                        <div className="col-sm-4">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="d-flex justify-content-center">
-                                        <h5 className="card-title">{category.Country}</h5>
-                                    </div>
-                                    <div className="d-flex justify-content-center">
-                                        <Link className="btn btn-primary btn-outline-light btn-lg" role="button" to="/lista"> {category.Country} </Link>
-                                    </div>
+            <div className="row">
+                {categories.map((category) => (
+                    <div className="col-sm-4" key={category.Mfr_ID}>
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="d-flex justify-content-center">
+                                    <h5 className="card-title">{category.Country}</h5>
+                                </div>
+                                <div className="d-flex justify-content-center">
+                                    <Link className="btn btn-primary btn-outline-light btn-lg" role="button" to="/lista">
+                                        {category.Country}
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
-            )}
+                ))}
+            </div>
         </div>
     );
 
