@@ -13,8 +13,8 @@ export default function List() {
             </div>
             <div className="container-fluid h-100">
                 <div className="row">
-                    <div class="col-3 bg-primary">col-3</div>
-                    <div class="col-9 bg-secondary">col-9</div>
+                    <div className="col-3 bg-primary">col-3</div>
+                    <div className="col-9 bg-secondary">col-9</div>
                 </div>
             </div>
         </div>

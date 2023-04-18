@@ -2,7 +2,16 @@ import axios from 'axios'
 
 const userLang = Liferay.ThemeDisplay.getLanguageId().replace("_","-");
 
-const  baseUrl = location.protocol + '//' + location.hostname;
+const protocol = location.protocol;
+
+const hostname = location.hostname;
+
+//If the port is not needed (e.g. PREPROD || PROD environment), leave it in blank
+//port must be in this format: ":<port>"
+const port = ":8080";
+
+const baseUrl = `${protocol}//${hostname}${port}`;
+
 
 let tokenObject = {'expiryTime': 0 };
 
@@ -55,8 +64,8 @@ const executeFunction = (configuration, functionRef) => {
 
   export function getListOfCategories(configuration) {
     const getFunc = (authParams) => {
-      //const url = `${baseUrl}/o/c/servicos/scopes/guest`; //TODO
-      const url = `https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json`;
+      const url = `${baseUrl}/o/v1/egf/categorias`;
+      //const url = `https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json`;
       return axios.get(url, authParams);
     };
   

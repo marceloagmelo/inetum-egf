@@ -9,8 +9,13 @@ export default function Home(configuration) {
 
     const getCategories = () => {
         getListOfCategories(configuration).then(result => {
+            console.log(JSON.stringify(result));
             const size = Object.keys(result).length;
-            return result && size > 0 ? setCategories(result.data.Results) : console.log(result);
+             result && size > 0 ? setCategories(result.data) : console.log(result);
+            /* if(result && size > 0) {
+               //averigurar se resulta.data.nome já existe
+            }  */
+
             // console.log(result.data.Results);
             // console.log(configuration);
         }).catch(err =>  {
@@ -30,15 +35,15 @@ export default function Home(configuration) {
             </div>
             <div className="row">
                 {categories.map((category) => (
-                    <div className="col-sm-4" key={category.Mfr_ID}>
+                    <div className="col-sm-4" key={category.id}>
                         <div className="card">
                             <div className="card-body">
                                 <div className="d-flex justify-content-center">
-                                    <h5 className="card-title">{category.Country}</h5>
+                                    <h5 className="card-title">{category.nome}</h5>
                                 </div>
                                 <div className="d-flex justify-content-center">
                                     <Link className="btn btn-primary btn-outline-light btn-lg" role="button" to="/lista">
-                                        {category.Country}
+                                        {category.nome}
                                     </Link>
                                 </div>
                             </div>
