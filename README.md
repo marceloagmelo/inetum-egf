@@ -17,6 +17,13 @@ Primeiro, inicie o bundle:
 blade server init
 ```
 
+Copiar o arquivo da pasta raiz portal-ext.properties:
+
+```
+copiar o arquivo para a pasta bundles
+```
+
+
 Feito isso, você deve executar o start do servidor:
 
 ```
