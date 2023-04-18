@@ -10,12 +10,10 @@ export default function Home(configuration) {
     const getCategories = () => {
         getListOfCategories(configuration).then(result => {
             const size = Object.keys(result).length;
-            result && size > 0 ? setCategories(result.data.Results
-            ) : console.log(result);
-            console.log(result.data.Results
-            )
-            console.log(configuration)
-        }).catch(function (err) {
+            return result && size > 0 ? setCategories(result.data.Results) : console.log(result);
+            // console.log(result.data.Results);
+            // console.log(configuration);
+        }).catch(err =>  {
             console.log(err);
         });
     }

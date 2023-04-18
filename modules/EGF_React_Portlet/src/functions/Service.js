@@ -51,12 +51,13 @@ const executeFunction = (configuration, functionRef) => {
     }
     return functionRef && functionRef();
   }
+  
 
   export function getListOfCategories(configuration) {
     const getFunc = (authParams) => {
       //const url = `${baseUrl}/o/c/servicos/scopes/guest`; //TODO
-        const url = `https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json`
-      return axios.get(`${url}`, authParams);
+      const url = `https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json`;
+      return axios.get(url, authParams);
     };
   
     return executeFunction(configuration, getFunc);
