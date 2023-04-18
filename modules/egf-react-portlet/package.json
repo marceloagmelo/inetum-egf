@@ -13,7 +13,8 @@
 	"main": "lib/index.es.js",
 	"name": "egf-react-portlet",
 	"scripts": {
-		"build": "babel --source-maps -d build/resources/main/META-INF/resources src/main/resources/META-INF/resources && liferay-npm-bundler"
+		"build": "babel --source-maps -d build/resources/main/META-INF/resources src/main/resources/META-INF/resources && liferay-npm-bundler",
+		"deploy": "npm run build && lnbs-deploy"
 	},
 	"version": "1.0.0"
 }

@@ -1,0 +1,24 @@
+{
+	"$schema": "https://raw.githubusercontent.com/liferay/liferay-js-toolkit/master/resources/schemas/configuration.schema.json",
+	"system": {
+		"category": "EGF_React_Portlet",
+		"name": "EGF_React_Portlet",
+		"fields": {}
+	},
+	"portletInstance": {
+		"fields": {
+			"clientId": {
+			  "type": "string",
+			  "name": "clientId",
+			  "description": "clientId-help",
+			  "default": ""
+			},
+			"clientSecret": {
+			  "type": "string",
+			  "name": "clientSecret",
+			  "description": "clientSecret-help",
+			  "default": ""
+			}
+		} 
+	}
+}
