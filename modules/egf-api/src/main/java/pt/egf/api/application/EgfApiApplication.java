@@ -34,10 +34,10 @@ public class EgfApiApplication extends Application {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Categoria> getCategorias() {
 		ArrayList<Categoria> lista = new ArrayList();
-		Categoria categoria = new Categoria("1","Categoria A");
-		lista.add(categoria);
-		categoria = new Categoria("2","Categoria B");
-		lista.add(categoria);
+		for (int x = 0; x < 12; x++) {
+			Categoria categoria = new Categoria( String.valueOf(x), "Categoria " + (x + 1));
+			lista.add(categoria);
+		}
 
 		return lista;
 	}
