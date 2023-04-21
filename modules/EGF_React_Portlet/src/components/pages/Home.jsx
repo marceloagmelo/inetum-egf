@@ -6,6 +6,10 @@ import { getListOfCategories } from "../../functions/Service";
 export default function Home(configuration) {
     const [categories, setCategories] = useState([])
 
+    const handleCategoryClick = () => {
+
+    }
+
     const getCategories = () => {
         getListOfCategories(configuration).then(result => {
             console.log(JSON.stringify(result));
@@ -38,7 +42,7 @@ export default function Home(configuration) {
                         <div className="card">
                             <div className="card-body">                                
                                 <div className="d-flex justify-content-center">
-                                    <Link className="btn btn-lg" role="button" to="/lista">
+                                    <Link className="btn btn-lg" role="button" to="/lista" onClick={handleCategoryClick}>
                                         {/*category.nome*/}
                                         <svg width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <defs>

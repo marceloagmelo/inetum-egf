@@ -70,4 +70,14 @@ const executeFunction = (configuration, functionRef) => {
     };
   
     return executeFunction(configuration, getFunc);
-}
+};
+
+
+export function getDocumentsByCategory(configuration) {
+  const getFunc = (authParams) => {
+    const url = `${baseUrl}`
+
+    return axios.get(url, authParams);
+  };
+
+};
