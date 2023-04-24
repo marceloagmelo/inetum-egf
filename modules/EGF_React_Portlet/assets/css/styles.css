@@ -10,13 +10,16 @@
 	font-family: monospace; white-space: pre;
 }
 
-/*.portlet-boundary_EGF_React_Portlet .btn-primary {
-	background-color: white
+
+/*.portlet-boundary_EGF_React_Portlet*/
+
+.portlet-boundary_EGF_React_Portlet_ .card {
+	transition: box-shadow .3s;
 }
 
-.portlet-boundary_EGF_React_Portlet .btn-outline-light:hover {
-	background-color: unset;
-}*/
+.portlet-boundary_EGF_React_Portlet_ .card:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
 
 
 
