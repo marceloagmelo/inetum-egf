@@ -54,6 +54,10 @@ export default function Home(configuration) {
         })
     };
 
+    const handleCategoryClick = () => {
+
+    }
+
     const getCategories = () => {
         getListOfCategories(configuration).then(result => {
             console.log(JSON.stringify(result));
@@ -101,7 +105,7 @@ export default function Home(configuration) {
                         <div className="card">
                             <div className="card-body">                                
                                 <div className="d-flex justify-content-center">
-                                    <Link className="btn btn-lg" role="button" to="/lista">
+                                    <Link className="btn btn-lg" role="button" to="/lista" onClick={handleCategoryClick}>
                                         {/*category.nome*/}
                                         {FolderIcon(index)}
                                         {/*<img }onError={ImageDontExists} src={remoteImg + category.id}/>*/}
