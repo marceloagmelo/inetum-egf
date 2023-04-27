@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import SearchBar from "../minorComponents/SearchBar";
 import Table from "../minorComponents/Table";
 import { data } from '../../data';
+import { getListOfCategories } from "../../functions/Service";
 
-
-export default function List() {
+export default function List(configuration) {
     const [query, setQuery] = useState("");
     const [show, setShow] = useState("");
     const [showSubCat, setShowSubCat] = useState("");
+    const [categories, setCategories] = useState([]);
+    const [selected, setSelected] = useState("");
 
     // Define a função handleQuery que filtra a lista de documentos
     const handleQuery = (data) => {
@@ -21,13 +23,33 @@ export default function List() {
         )
     };
 
+    const getCategories = () => {
+        getListOfCategories(configuration).then(result => {
+            const size = Object.keys(result).length;
+            result && size > 0 ? setCategories(result.data) : console.log(result);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
     const handleToggle = (category) => {
         show === category ? setShow("") : setShow(category);
     };
 
     const handleToggleSubCatgory = (subCat) => {
-        show === subCat ? setShowSubCat("") : setShowSubCat(subCat);
+        showSubCat === subCat ? setShowSubCat("") : setShowSubCat(subCat);
     };
+
+    const handleSelection = (event) => {
+        console.log(event.target.value)
+    }
+
+    function teste(event){
+        
+        console.log('target' + event.target);
+        console.log('value' + event.target.value);
+
+    }
 
 
     // Define o listener que atualiza o estado 'query' sempre que o usuário digita na barra de pesquisa
@@ -46,66 +68,41 @@ export default function List() {
             <div className="container">
                 <div className="row m-3">
                     <div className="col-3 d-flex flex-column filter-column">
-                        <h6 className="btn btn-light d-flex" onClick={() => handleToggle("category")}>Categorias</h6>
+                        <h6 className="btn btn-light d-flex" onClick={() => { handleToggle("category"); getCategories() }}>Categorias</h6>
                         {
-                            show === "category" ?
-                                <div className="category">
-                                    <ul className="category-list" style={{ listStyleType: "none" }}>
-                                        <li><h6 className="btn btn-link"
-                                            style={{ textDecoration: "none" }}
-                                            onClick={() => handleToggleSubCatgory("category1")}> Categoria 1</h6>
-                                            {
-                                                showSubCat === "category1" ?
-                                                    <div className="category1">
-                                                        <ul className="doc-type-list" style={{ listStyleType: "none" }}>
-                                                            <li><input type="checkbox" /> Tipo 1</li>
-                                                            <li><input type="checkbox" /> Tipo 2</li>
-                                                            <li><input type="checkbox" /> Tipo 3</li>
-                                                        </ul>
-                                                    </div>
-                                                    : null
-                                            }
-                                        </li>
-                                        <li><h6 className="btn btn-link"
-                                            style={{ textDecoration: "none" }}
-                                            onClick={() => handleToggleSubCatgory("category2")}> Categoria 2</h6>
-                                            {
-                                                showSubCat === "category2" ?
-                                                    <div className="category2">
-                                                        <ul className="doc-type-list" style={{ listStyleType: "none" }}>
-                                                            <li><input type="checkbox" /> Tipo 1</li>
-                                                            <li><input type="checkbox" /> Tipo 2</li>
-                                                            <li><input type="checkbox" /> Tipo 3</li>
-                                                        </ul>
-                                                    </div>
-                                                    : null
-                                            }</li>
-                                        <li><h6 className="btn btn-link"
-                                            style={{ textDecoration: "none" }}
-                                            onClick={() => handleToggleSubCatgory("category3")}> Categoria 3</h6>
-                                            {
-                                                showSubCat === "category3" ?
-                                                    <div className="category3">
-                                                        <ul className="doc-type-list" style={{ listStyleType: "none" }}>
-                                                            <li><input type="checkbox" /> Tipo 1</li>
-                                                            <li><input type="checkbox" /> Tipo 2</li>
-                                                            <li><input type="checkbox" /> Tipo 3</li>
-                                                        </ul>
-                                                    </div>
-                                                    : null
-                                            }</li>
-                                    </ul>
-                                </div>
-                                : null
-                        }
+
+                            categories.map((category) => (
+
+                                show === "category" ?
+                                    <div className="category" key={category.id}>
+                                        <ul className="category-list" style={{ listStyleType: "none" }}>
+                                            <li><h6 className="btn btn-light"
+                                                style={{ textDecoration: "none" }}
+                                                onClick={() => handleToggleSubCatgory(category.nome)}> {category.nome}</h6>
+                                                {
+                                                    showSubCat === category.nome ?
+                                                        <div className={category.nome}>
+                                                            <ul className="doc-type-list" style={{ listStyleType: "none" }}>
+                                                                <li><input id="1" value="Tipo 1" type="checkbox" onChange={ teste }/> Tipo 1</li>
+                                                                <li><input id="2" value="Tipo 2" type="checkbox" onChange={ handleSelection}/> Tipo 2</li>
+                                                                <li><input id="3" value="Tipo 3" type="checkbox" onChange={ (event) => handleSelection(event)}/> Tipo 3</li>
+                                                            </ul>
+                                                        </div>
+                                                        : null
+                                                }
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    : null
+                            ))}
                         <h6 type="button" className="btn btn-light d-flex" onClick={() => handleToggle("company")}>Empresas</h6>
                         {
                             show === "company" ?
                                 <div className="company">
                                     <ul className="company-list" style={{ listStyleType: "none" }}>
-                                        <li><input type="checkbox" /> Empresa 1</li>
-                                        <li><input type="checkbox" /> Empresa 2</li>
-                                        <li><input type="checkbox" /> Empresa 3</li>
+                                        <li><input id="4" value="Empresa 1" type="checkbox" onChange={ (event) => handleSelection(event)}/> Empresa 1</li>
+                                        <li><input id="5" value="Empresa 2" type="checkbox" onChange={ (event) => handleSelection(event)}/> Empresa 2</li>
+                                        <li><input id="6" value="Empresa 3" type="checkbox" onChange={ (event) => handleSelection(event)}/> Empresa 3</li>
                                     </ul>
                                 </div>
                                 : null
@@ -116,7 +113,7 @@ export default function List() {
                                 <div className="date">
                                     <ul className="date-list" style={{ listStyleType: "none" }}>
                                         <li> Depois de <input type="date" /></li>
-                                        <li> Antes de   <input type="date" /></li>  
+                                        <li> Antes de <input type="date" /></li>
                                     </ul>
                                 </div>
                                 : null
