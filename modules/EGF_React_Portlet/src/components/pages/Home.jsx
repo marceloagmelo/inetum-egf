@@ -85,10 +85,14 @@ export default function Home(configuration) {
     useEffect(() => {
         //let imgsFound = [];
         categories.forEach(category => {
-            fetch(remoteImg + category.id, { method: "HEAD" }).then((response) => {
-                if(response.status === 200 || response.status === 304)
-                    document.getElementById("category"+category.id).innerHTML = "<img width='56' src='"+ remoteImg + category.id + "'/>"                
-            });
+            try {
+                fetch(remoteImg + category.id, { method: "HEAD" }).then((response) => {
+                    if(response.status === 200 || response.status === 304)
+                        document.getElementById("category"+category.id).innerHTML = "<img width='56' src='"+ remoteImg + category.id + "'/>"                
+                });
+            } catch (error) {
+                console.log('Img not found:', error);
+            }
         })
         //console.log("Imgs found=", imgsFound)
         //setLoadedImgs(imgsFound);

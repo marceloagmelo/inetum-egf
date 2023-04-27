@@ -21,5 +21,26 @@
     box-shadow: 0 0 11px rgba(33,33,33,.2);
 }
 
+.portlet-boundary_EGF_React_Portlet_ .portlet-title-text {
+	display: none
+}
 
+.list-files {
+	background-color: #fff;
+    padding: 20px;
+}
 
+.has-search .form-control {
+	background-color: #ecf4f6;
+    border-radius: 20px;
+    box-shadow: inset 0px 2px 2px 0px rgb(170 185 187 / 80%);
+}
+
+.filter-column {
+	background-color: #f6fafb;
+    padding-top: 20px;
+}
+
+.filter-column h6 {
+	background-color: transparent;
+}

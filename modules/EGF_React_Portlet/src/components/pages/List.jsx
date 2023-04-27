@@ -45,7 +45,7 @@ export default function List() {
             </div>
             <div className="container">
                 <div className="row m-3">
-                    <div className="col-3 d-flex flex-column">
+                    <div className="col-3 d-flex flex-column filter-column">
                         <h6 className="btn btn-light d-flex" onClick={() => handleToggle("category")}>Categorias</h6>
                         {
                             show === "category" ?
@@ -122,7 +122,7 @@ export default function List() {
                                 : null
                         }
                     </div>
-                    <div className="col-9">
+                    <div className="col-9 list-files">
                         <div className="search">
                             <SearchBar placeholder="Pesquise documentos" onChange={searchBarListener} />
                             <div className="dataResult">
