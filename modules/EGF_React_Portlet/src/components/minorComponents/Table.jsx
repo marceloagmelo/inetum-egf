@@ -6,6 +6,13 @@ export default function Table(configuration, { data }) {
     const [sortColumn, setSortColumn] = useState("Nome"); // Estado que controla a coluna de ordenação
     const [sortDirection, setSortDirection] = useState("asc"); // Estado que controla a direção da ordenação
     const [sortedData, setSortedData] = useState([]); // Estado que armazena os dados ordenados
+    const [currentPage, setCurrentPage] = useState(1);
+    const recordsPerPage = 10;
+    const lastIndex = currentPage * recordsPerPage;
+    const firstIndex = lastIndex - recordsPerPage;
+    const records = sortedData.slice(firstIndex, lastIndex)
+    const numberOfPages = Math.ceil(sortedData.length / recordsPerPage)
+    const numbers = [...Array(numberOfPages + 1).keys()].slice(1);
 
     useEffect(() => {
         getDocuments(); // Executa a função getDocuments() sempre que os estados sortColumn ou sortDirection mudarem
@@ -29,6 +36,9 @@ export default function Table(configuration, { data }) {
             setSortDirection("asc"); // Define a direção da ordenação como ascendente
         }
     };
+
+    function prePage(){};
+    function nextPage(){};
 
     return (
         <>
@@ -62,7 +72,7 @@ export default function Table(configuration, { data }) {
                 </tr>
             </thead>
             <tbody>
-                {sortedData.map((document) => {
+                {records.map((document) => {
                     return (
                         <tr key={document.id}>
                             <td>{document.Nome}</td>
@@ -74,15 +84,20 @@ export default function Table(configuration, { data }) {
                 })}
             </tbody>
         </table>
-        <nav>
+        <nav className="d-flex justify-content-between m-3">
+            <div className="page-count">
+                <p>10 registos (página 1/3)</p>
+            </div>
+            <div className="arrow">
             <ul className="pagination">
                 <li className="page-item">
-                    <a href="#" className="page-link">anterior</a>
+                    <a href="#" className="page-link" onClick={prePage}> &lt; anterior</a>
                 </li>
                 <li className="page-item">
-                    <a href="#" className="page-link">seguinte</a>
+                    <a href="#" className="page-link" onClick={nextPage}>seguinte &gt; </a>
                 </li>
             </ul>
+            </div>
         </nav>
         </>
     );
