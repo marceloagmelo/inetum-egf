@@ -5,8 +5,8 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import pt.egf.api.application.domain.Lov;
 import pt.egf.api.application.domain.LovRow;
-import pt.egf.api.application.model.Categoria;
-import pt.egf.api.application.model.LovCategorias;
+import pt.egf.api.application.model.Empresa;
+import pt.egf.api.application.model.LovEmpresas;
 import pt.egf.api.application.util.api.SimpleFlowApi;
 
 import java.util.ArrayList;
@@ -14,27 +14,29 @@ import java.util.Iterator;
 import java.util.List;
 
 @Component(
-    immediate = true,
-    service = CategoriaService.class
+        immediate = true,
+        service = EmpresaService.class
 )
-public class CategoriaServiceImpl implements CategoriaService {
+public class EmpresaServiceImpl implements EmpresaService {
 
     @Reference
     protected SimpleFlowApi simpleFlowApi;
+
     @Override
-    public LovCategorias getCategorias() {
-        LovCategorias lovCategorias = null;
-        List<Categoria> listaCategoria = null;
-        int contadorCategoria = 0;
+    public LovEmpresas getEmpresas() {
+        LovEmpresas lovEmpresas = null;
+        List<Empresa> listaEmpresa= null;
+
+        int contadorEmpresa = 0;
 
         String json = "{" +
                 "    \"fieldSearch\": {[{}]" +
                 "}";
 
-        String ret = simpleFlowApi.callService(null, "/categorias", json);
+        String ret = simpleFlowApi.callService(null, "/empresas", json);
 
         if (!ret.isBlank()) {
-            listaCategoria = new ArrayList<Categoria>();
+            listaEmpresa = new ArrayList<Empresa>();
             ObjectMapper objectMapper = new ObjectMapper();
 
             try {
@@ -49,21 +51,19 @@ public class CategoriaServiceImpl implements CategoriaService {
                     Iterator<LovRow> it = ll.iterator();
 
                     while (it.hasNext()) {
-                        contadorCategoria++;
-                        String nomeCategoria = it.next().getValue();
+                        contadorEmpresa++;
+                        String nomeEmpresa = it.next().getValue();
 
-                        Categoria categoria = new Categoria(String.valueOf(contadorCategoria), nomeCategoria);
-                        listaCategoria.add(categoria);
+                        Empresa empresa = new Empresa(String.valueOf(contadorEmpresa), nomeEmpresa);
+                        listaEmpresa.add(empresa);
                     }
-
                 }
-
-                lovCategorias = new LovCategorias(Boolean.valueOf(lov.getHasMoreData()), listaCategoria);
+                lovEmpresas = new LovEmpresas(Boolean.valueOf(lov.getHasMoreData()), listaEmpresa);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        return lovCategorias;
+        return lovEmpresas;
     }
 }

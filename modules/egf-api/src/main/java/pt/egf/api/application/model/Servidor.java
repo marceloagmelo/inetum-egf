@@ -1,18 +1,15 @@
 package pt.egf.api.application.model;
 
-public class Categoria {
+public class Servidor {
 
     private String id;
     private String nome;
+    private String ip;
 
-    public Categoria() {
-        this.id = "";
-        this.nome = "";
-    }
-
-    public Categoria(String id, String nome) {
+    public Servidor(String id, String nome, String ip) {
         this.id = id;
         this.nome = nome;
+        this.ip = ip;
     }
 
     public String getId() {
@@ -29,5 +26,13 @@ public class Categoria {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

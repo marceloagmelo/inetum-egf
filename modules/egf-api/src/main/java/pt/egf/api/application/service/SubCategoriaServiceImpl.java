@@ -6,7 +6,8 @@ import org.osgi.service.component.annotations.Reference;
 import pt.egf.api.application.domain.Lov;
 import pt.egf.api.application.domain.LovRow;
 import pt.egf.api.application.model.Categoria;
-import pt.egf.api.application.model.LovCategorias;
+import pt.egf.api.application.model.LovSubCategorias;
+import pt.egf.api.application.model.SubCategoria;
 import pt.egf.api.application.util.api.SimpleFlowApi;
 
 import java.util.ArrayList;
@@ -14,27 +15,28 @@ import java.util.Iterator;
 import java.util.List;
 
 @Component(
-    immediate = true,
-    service = CategoriaService.class
+        immediate = true,
+        service = SubCategoriaService.class
 )
-public class CategoriaServiceImpl implements CategoriaService {
+public class SubCategoriaServiceImpl implements SubCategoriaService {
 
     @Reference
     protected SimpleFlowApi simpleFlowApi;
+
     @Override
-    public LovCategorias getCategorias() {
-        LovCategorias lovCategorias = null;
-        List<Categoria> listaCategoria = null;
-        int contadorCategoria = 0;
+    public LovSubCategorias getSubCategorias() {
+        LovSubCategorias lovSubCategorias = null;
+        List<SubCategoria> listaSubCategoria = null;
+        int contadorSubCategoria = 0;
 
         String json = "{" +
                 "    \"fieldSearch\": {[{}]" +
                 "}";
 
-        String ret = simpleFlowApi.callService(null, "/categorias", json);
+        String ret = simpleFlowApi.callService(null, "/subcategorias", json);
 
         if (!ret.isBlank()) {
-            listaCategoria = new ArrayList<Categoria>();
+            listaSubCategoria = new ArrayList<SubCategoria>();
             ObjectMapper objectMapper = new ObjectMapper();
 
             try {
@@ -48,22 +50,28 @@ public class CategoriaServiceImpl implements CategoriaService {
                     List<LovRow> ll = iterator.next();
                     Iterator<LovRow> it = ll.iterator();
 
+                    Categoria categoria = new Categoria();
                     while (it.hasNext()) {
-                        contadorCategoria++;
+                        contadorSubCategoria++;
+
                         String nomeCategoria = it.next().getValue();
 
-                        Categoria categoria = new Categoria(String.valueOf(contadorCategoria), nomeCategoria);
-                        listaCategoria.add(categoria);
+                        categoria.setId("");
+                        categoria.setNome(nomeCategoria);
+
+                        String nomeSubCategoria = it.next().getValue();
+
+                        SubCategoria subCategoria = new SubCategoria(String.valueOf(contadorSubCategoria), nomeSubCategoria, categoria);
+                        listaSubCategoria.add(subCategoria);
+
                     }
-
                 }
-
-                lovCategorias = new LovCategorias(Boolean.valueOf(lov.getHasMoreData()), listaCategoria);
+                lovSubCategorias = new LovSubCategorias(Boolean.valueOf(lov.getHasMoreData()), listaSubCategoria);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        return lovCategorias;
+        return lovSubCategorias;
     }
 }

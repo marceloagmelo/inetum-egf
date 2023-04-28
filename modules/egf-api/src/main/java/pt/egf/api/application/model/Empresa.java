@@ -1,16 +1,16 @@
 package pt.egf.api.application.model;
 
-public class Categoria {
+public class Empresa {
 
     private String id;
     private String nome;
 
-    public Categoria() {
+    public Empresa() {
         this.id = "";
         this.nome = "";
     }
 
-    public Categoria(String id, String nome) {
+    public Empresa(String id, String nome) {
         this.id = id;
         this.nome = nome;
     }

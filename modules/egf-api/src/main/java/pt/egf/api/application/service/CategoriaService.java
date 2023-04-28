@@ -1,9 +1,7 @@
 package pt.egf.api.application.service;
 
-import pt.egf.api.application.model.Categoria;
-
-import java.util.List;
+import pt.egf.api.application.model.LovCategorias;
 
 public interface CategoriaService {
-    public List<Categoria> getCategorias();
+    public LovCategorias getCategorias();
 }

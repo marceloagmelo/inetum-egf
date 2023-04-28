@@ -4,8 +4,14 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 import pt.egf.api.application.domain.ApiError;
-import pt.egf.api.application.model.Categoria;
+import pt.egf.api.application.model.LovCategorias;
+import pt.egf.api.application.model.LovEmpresas;
+import pt.egf.api.application.model.LovServidores;
+import pt.egf.api.application.model.LovSubCategorias;
 import pt.egf.api.application.service.CategoriaService;
+import pt.egf.api.application.service.EmpresaService;
+import pt.egf.api.application.service.ServidorService;
+import pt.egf.api.application.service.SubCategoriaService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,7 +20,6 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,7 +35,13 @@ import java.util.Set;
 public class EgfApiApplication extends Application {
 
 	@Reference
-	protected CategoriaService categoriaService;
+	private CategoriaService categoriaService;
+	@Reference
+	private SubCategoriaService subCategoriaService;
+	@Reference
+	private EmpresaService empresaService;
+	@Reference
+	private ServidorService servidorService;
 
 	public Set<Object> getSingletons() {
 		return Collections.<Object>singleton(this);
@@ -40,15 +51,56 @@ public class EgfApiApplication extends Application {
 	@Path("/categorias")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCategorias() {
-		List<Categoria> lista = categoriaService.getCategorias();
+		LovCategorias lov = categoriaService.getCategorias();
 
-		if (null != lista) {
-			return Response.ok(lista).build();
+		if (null != lov) {
+			return Response.ok(lov).build();
 		} else {
 			ApiError erro = new ApiError(String.valueOf(Response.status(Response.Status.NOT_FOUND).build().getStatus()), "Lista vazia!");
 			return Response.status(Response.Status.NOT_FOUND).entity(erro).build();
 		}
+	}
 
+	@GET
+	@Path("/subcategorias")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getSubCategorias() {
+		LovSubCategorias lov = subCategoriaService.getSubCategorias();
+
+		if (null != lov) {
+			return Response.ok(lov).build();
+		} else {
+			ApiError erro = new ApiError(String.valueOf(Response.status(Response.Status.NOT_FOUND).build().getStatus()), "Lista vazia!");
+			return Response.status(Response.Status.NOT_FOUND).entity(erro).build();
+		}
+	}
+
+	@GET
+	@Path("/empresas")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getEmpresas() {
+		LovEmpresas lov = empresaService.getEmpresas();
+
+		if (null != lov) {
+			return Response.ok(lov).build();
+		} else {
+			ApiError erro = new ApiError(String.valueOf(Response.status(Response.Status.NOT_FOUND).build().getStatus()), "Lista vazia!");
+			return Response.status(Response.Status.NOT_FOUND).entity(erro).build();
+		}
+	}
+
+	@GET
+	@Path("/servidores")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getServidores() {
+		LovServidores lov = servidorService.getServidores();
+
+		if (null != lov) {
+			return Response.ok(lov).build();
+		} else {
+			ApiError erro = new ApiError(String.valueOf(Response.status(Response.Status.NOT_FOUND).build().getStatus()), "Lista vazia!");
+			return Response.status(Response.Status.NOT_FOUND).entity(erro).build();
+		}
 	}
 
 }

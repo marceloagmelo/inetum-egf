@@ -1,18 +1,15 @@
 package pt.egf.api.application.model;
 
-public class Categoria {
+public class SubCategoria  {
 
     private String id;
     private String nome;
+    private Categoria categoria;
 
-    public Categoria() {
-        this.id = "";
-        this.nome = "";
-    }
-
-    public Categoria(String id, String nome) {
+    public SubCategoria(String id, String nome, Categoria categoria) {
         this.id = id;
         this.nome = nome;
+        this.categoria = categoria;
     }
 
     public String getId() {
@@ -29,5 +26,13 @@ public class Categoria {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

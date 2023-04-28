@@ -2,4 +2,5 @@ dependencies {
 	compileOnly group: "com.liferay.portal", name: "release.portal.api"
 	compileOnly group: "org.osgi", name: "org.osgi.service.jaxrs"
 	compileInclude group: "com.konghq", name: "unirest-java", version: "3.7.04"
+
 }
