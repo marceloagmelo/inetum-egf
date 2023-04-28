@@ -31,6 +31,7 @@ export default function Table(configuration, { data }) {
     };
 
     return (
+        <>
         <table className="table table-hover">
             <thead>
                 <tr>
@@ -73,6 +74,17 @@ export default function Table(configuration, { data }) {
                 })}
             </tbody>
         </table>
+        <nav>
+            <ul className="pagination">
+                <li className="page-item">
+                    <a href="#" className="page-link">anterior</a>
+                </li>
+                <li className="page-item">
+                    <a href="#" className="page-link">seguinte</a>
+                </li>
+            </ul>
+        </nav>
+        </>
     );
 }
 

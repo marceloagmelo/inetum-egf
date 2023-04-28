@@ -26,7 +26,7 @@ export default function List(configuration) {
     const getCategories = () => {
         getListOfCategories(configuration).then(result => {
             const size = Object.keys(result).length;
-            result && size > 0 ? setCategories(result.data) : console.log(result);
+            result && size > 0 ? setCategories(result.data.categorias) : console.log(result);
         }).catch(err => {
             console.log(err);
         });

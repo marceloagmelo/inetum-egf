@@ -62,7 +62,7 @@ export default function Home(configuration) {
         getListOfCategories(configuration).then(result => {
             console.log(JSON.stringify(result));
             const size = Object.keys(result).length;
-             result && size > 0 ? setCategories(result.data) : console.log(result);
+             result && size > 0 ? setCategories(result.data.categorias) : console.log(result);
             /* if(result && size > 0) {
                //averigurar se resulta.data.nome já existe
             }  */
